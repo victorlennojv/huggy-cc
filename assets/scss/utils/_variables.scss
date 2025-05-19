@@ -1,0 +1,93 @@
+:root {
+  --font-size-title-1: 1.625rem;    // 26px
+  --font-size-title-2: 1.250rem;    // 20px
+  --font-size-body-1: 1.000rem;     // 16px
+  --font-size-body-2: 0.875rem;     // 14px
+  --font-size-caption-1: 0.750rem;  // 12px
+  --font-size-caption-2: 0.625rem;  // 10px
+
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  --fill-neutral-low-0: #ffffff;
+  --fill-neutral-low-1: #f6f6f8;
+  --fill-neutral-low-2: #f0f0f2;
+  --fill-neutral-low-3: #e8e8eb;
+  --fill-neutral-low-4: #dcdce1;
+  --fill-neutral-low-5: #cfcfd5;
+
+  --fill-neutral-medium-0: #adadb3;
+  --fill-neutral-medium-1: #9d9da3;
+  --fill-neutral-medium-2: #75757b;
+  --fill-neutral-medium-3: #5d5d63;
+  --fill-neutral-medium-4: #46464a;
+  --fill-neutral-medium-5: #3a3a3d;
+
+  --fill-neutral-high-0: #28282b;
+  --fill-neutral-high-1: #232326;
+  --fill-neutral-high-2: #1e1e21;
+  --fill-neutral-high-3: #19181b;
+  --fill-neutral-high-4: #141316;
+  --fill-neutral-high-5: #0f0e10;
+
+  --fill-primary-0: #eef0fc;
+  --fill-primary-1: #d8defc;
+  --fill-primary-2: #a4b2f8;
+  --fill-primary-3: #374fc9;
+  --fill-primary-4: #293ea5;
+  --fill-primary-5: #1e2f83;
+
+  --fill-success-0: #f1fdf4;
+  --fill-success-1: #e9fcef;
+  --fill-success-2: #bef7d2;
+  --fill-success-3: #47c480;
+  --fill-success-4: #38a96d;
+  --fill-success-5: #2b8656;
+
+  --fill-danger-0: #fcf2f2;
+  --fill-danger-1: #fbdbdb;
+  --fill-danger-2: #f7afae;
+  --fill-danger-3: #d7494b;
+  --fill-danger-4: #af2f30;
+  --fill-danger-5: #902524;
+
+  --text-on-neutral-low-weak: #75757b;
+  --text-on-neutral-low-default: #46464a;
+  --text-on-neutral-low-strong: #232326;
+  --text-on-neutral-low-cta: #2934a5;
+  --text-on-neutral-low-cta-hover: #373dc9;
+  --text-on-neutral-low-success: #38a96d;
+  --text-on-neutral-low-success-hover: #47c480;
+  --text-on-neutral-low-danger: #af2f30;
+  --text-on-neutral-low-danger-hover: #f7afae;
+  --text-on-neutral-low-disabled: #9d9da3;
+
+  --text-on-neutral-high-weak: #adadb3;
+  --text-on-neutral-high-default: #e8e8eb;
+  --text-on-neutral-high-strong: #ffffff;
+  --text-on-neutral-high-cta: #a4b2f8;
+  --text-on-neutral-high-cta-hover: #d8defc;
+  --text-on-neutral-high-success: #bef7d2;
+  --text-on-neutral-high-success-hover: #e9fcef;
+  --text-on-neutral-high-danger: #f7afae;
+  --text-on-neutral-high-danger-hover: #fbdbdb;
+  --text-on-neutral-high-disabled: #cfcfd5;
+
+  --text-on-color-low-weak: #5d5d63;
+  --text-on-color-low-default: #46464a;
+  --text-on-color-low-strong: #141316;
+
+  --text-on-color-high-weak: #ffffffcc;
+  --text-on-color-high-default: #ffffffeb;
+  --text-on-color-high-strong: #ffffff;
+
+  --border-neutral-0: #ffffff;
+  --border-neutral-1: #e8e8eb;
+  --border-neutral-2: #dcdce1;
+  --border-neutral-3: #cfcfd5;
+  --border-neutral-4: #adadb3;
+  --border-neutral-5: #232326;
+
+  --border-primary-0: #d8defc;
+  --border-primary-1: #374fc9;
+} 

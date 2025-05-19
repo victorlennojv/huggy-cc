@@ -1,0 +1,74 @@
+@mixin title-1 {
+  font-size: var(--font-size-title-1);
+  font-weight: var(--font-weight-bold);
+}
+
+@mixin title-2 {
+  font-size: var(--font-size-title-2);
+  font-weight: var(--font-weight-bold);
+}
+
+@mixin body-1-regular {
+  font-size: var(--font-size-body-1);
+  font-weight: var(--font-weight-regular);
+}
+
+@mixin body-1-bold {
+  font-size: var(--font-size-body-1);
+  font-weight: var(--font-weight-bold);
+}
+
+@mixin body-2-regular {
+  font-size: var(--font-size-body-2);
+  font-weight: var(--font-weight-regular);
+}
+
+@mixin body-2-bold {
+  font-size: var(--font-size-body-2);
+  font-weight: var(--font-weight-bold);
+}
+
+@mixin caption-1 {
+  font-size: var(--font-size-caption-1);
+  font-weight: var(--font-weight-regular);
+}
+
+@mixin caption-2 {
+  font-size: var(--font-size-caption-2);
+  font-weight: var(--font-weight-regular);
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+} 
