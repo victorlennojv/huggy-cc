@@ -29,7 +29,7 @@ const { size = 'big', name = '', src = '' } = defineProps<Props>()
 const initials = computed(() => getInitials(name))
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-avatar {
   display: flex;
   align-items: flex-start;

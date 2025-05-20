@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/scss/utils/_variables.scss" as *; @use "~/assets/scss/utils/_mixins.scss" as *;'
+          additionalData: '@use "~/assets/scss/utils/variables" as *; @use "~/assets/scss/utils/mixins" as *;'
         }
       }
     }
@@ -17,5 +17,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/test-utils',
     '@nuxt/icon'
-  ]
+  ],
+  runtimeConfig: {
+    accessToken: process.env.ACCESS_TOKEN,
+  }
 })

@@ -24,7 +24,7 @@ interface Props {
 const { size = 'small', disabled = false } = defineProps<Props>()
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-icon-button {
   @include flex-center;
   padding: 2px 4px;

@@ -28,7 +28,7 @@ function onInput(event: Event) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-input {
   display: flex;
   flex-direction: column;

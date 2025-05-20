@@ -7,7 +7,7 @@
 <script setup lang="ts">
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-card {
   background: var(--fill-neutral-low-0);
   border-radius: 16px;

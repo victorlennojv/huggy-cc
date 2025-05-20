@@ -13,7 +13,7 @@ import BaseButton from '~/components/common/BaseButton.vue'
 defineEmits(['open:login'])
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .login-home {
   display: flex;
   flex-direction: column;

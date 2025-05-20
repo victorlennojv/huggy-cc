@@ -20,7 +20,7 @@ const { variant = 'primary', fullWidth = false, disabled = false } = defineProps
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-button {
   @include flex-center;
   @include body-1-bold;

@@ -1,3 +1,3 @@
-@import './utils/variables';
-@import './utils/mixins';
-@import './base/reset';
+@use './utils/variables' as *;
+@use './utils/mixins' as *;
+@use './base/reset';
