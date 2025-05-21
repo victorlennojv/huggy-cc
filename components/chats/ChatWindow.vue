@@ -28,6 +28,8 @@
             'chat-window__message',
             {
               'chat-window__message--me': msg.senderType === 'agent',
+              'chat-window__message--sending': msg.status === 'sending',
+              'chat-window__message--error': msg.status === 'error'
             },
           ]"
         >
@@ -130,12 +132,22 @@ defineEmits(["send"])
     word-break: break-word;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+    position: relative;
 
     &--me {
       background: var(--fill-primary-3);
       color: var(--text-on-color-high-strong);
       border-radius: 6px 6px 2px 6px;
       align-self: flex-end;
+    }
+
+    &--sending {
+      opacity: 0.7;
+    }
+
+    &--error {
+      background: var(--fill-error-3);
+      color: var(--text-on-color-high-strong);
     }
   }
   &__time {
@@ -152,6 +164,13 @@ defineEmits(["send"])
     padding: 12px;
     background: var(--fill-neutral-low-0);
     border-top: 1px solid var(--fill-neutral-low-1);
+  }
+  &__status {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
   }
 }
 </style>

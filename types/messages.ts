@@ -48,4 +48,5 @@ export interface Message {
   channel: string;
   sendAt: string;
   readAt: string | null;
+  status?: 'sending' | 'sent' | 'error';
 }

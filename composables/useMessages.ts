@@ -23,15 +23,36 @@ export const useMessages = (selectedConversation: Ref<Conversation | undefined>)
 
   const sendMessage = async (msg: string) => {
     if (!selectedConversation.value) return
-    isLoadingMessages.value = true
+    // @ts-expect-error missing types
+    const optimisticMessage: Message = {
+      id: Date.now(),
+      text: msg,
+      senderType: 'agent',
+      sendAt: new Date().toISOString(),
+      status: 'sending'
+    }
+
+    messages.value = [...messages.value, optimisticMessage]
+
     try {
       await MessageService.sendMessage(selectedConversation.value.id, msg)
-      await fetchMessages()
+      const index = messages.value.findIndex(m => m.id === optimisticMessage.id)
+      if (index !== -1) {
+        messages.value[index] = {
+          ...messages.value[index],
+          status: 'sent'
+        }
+      }
     } catch (error) {
-      console.error('Error handling message:', error)
-      messages.value = []
-    } finally {
-      isLoadingMessages.value = false
+      console.error(error)
+      const index = messages.value.findIndex(m => m.id === optimisticMessage.id)
+      if (index !== -1) {
+        messages.value[index] = {
+          ...messages.value[index],
+          status: 'error',
+          text: `${msg} ❗`
+        }
+      }
     }
   }
 
