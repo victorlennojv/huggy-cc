@@ -151,6 +151,11 @@ defineEmits(["send"])
       background: var(--fill-danger-3);
       color: var(--text-on-color-high-strong);
     }
+
+    @media (max-width: 660px) {
+      max-width: 100%;
+    }
+  
   }
   &__time {
     font-size: 0.75em;
