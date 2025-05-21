@@ -5,6 +5,7 @@
       'base-icon-button--disabled': disabled
     }"
     :disabled="disabled"
+    @click="emit('click')"
   >
     <Icon 
       class="base-icon-button__icon"
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const { size = 'small', disabled = false } = defineProps<Props>()
+const emit = defineEmits(['click'])
 </script>
 
 <style lang="scss">
