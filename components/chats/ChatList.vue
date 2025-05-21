@@ -20,11 +20,20 @@
         Nenhum chat disponível.
       </li>
     </ul>
+    <div class="chat-list__footer">
+      <BaseIconButton 
+        icon="uil:signout" 
+        size="medium"
+        @click="$emit('logout')"
+      />
+    </div>
   </aside>
 </template>
 
 <script setup lang="ts">
 import BaseAvatar from '~/components/common/BaseAvatar.vue'
+import BaseIconButton from '~/components/common/BaseIconButton.vue'
+
 interface Conversation {
   id: number
   name: string
@@ -37,7 +46,7 @@ defineProps<{
   selected?: Conversation
 }>()
 
-defineEmits(['select'])
+defineEmits(['select', 'logout'])
 </script>
 
 <style lang="scss">
@@ -46,6 +55,10 @@ defineEmits(['select'])
   background: var(--fill-neutral-low-0);
   border-right: 1px solid var(--fill-neutral-low-1);
   padding: 16px 6px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &__title {
     font-size: var(--font-size-title-2);
@@ -64,6 +77,9 @@ defineEmits(['select'])
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow-y: auto;
+    flex: 1;
+    padding-bottom: 60px;
   }
 
   &__item {
@@ -105,6 +121,13 @@ defineEmits(['select'])
     color: var(--text-on-neutral-low-default);
     text-align: center;
     padding: 16px 0;
+  }
+
+  &__footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px;
   }
 
   @media (max-width: 600px) {
