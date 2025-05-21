@@ -71,6 +71,7 @@ function reset() {
 }
 
 function triggerFileInput() {
+  if (props.chatSituation === 'finishing') return
   fileInput.value?.click()
 }
 
