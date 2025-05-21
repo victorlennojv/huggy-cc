@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, onMounted } from 'vue'
 import ChatList from '~/components/chats/ChatList.vue'
 import ChatWindow from '~/components/chats/ChatWindow.vue'
 import { useConversations } from '~/composables/useConversations'
@@ -58,6 +58,15 @@ const handleLogout = async () => {
     console.error('Error:', error)
   }
 }
+
+onMounted(async () => {
+  const { checkAuth } = useAuth()
+  const isAuthenticated = await checkAuth()
+  
+  if (!isAuthenticated) {
+    navigateTo('/login')
+  }
+})
 </script>
 
 <style scoped lang="scss">
