@@ -8,6 +8,7 @@
       />
       <ChatWindow
         v-if="selectedConversation"
+        ref="chatWindowRef"
         :conversation="selectedConversation"
         :messages="messages"
         :is-loading="isLoadingMessages"
@@ -17,20 +18,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, onMounted } from 'vue'
-import ChatList from '~/components/chats/ChatList.vue'
-import ChatWindow from '~/components/chats/ChatWindow.vue'
+import type { Conversation } from '~/types/conversation'
 import { useConversations } from '~/composables/useConversations'
 import { useMessages } from '~/composables/useMessages'
 import { useAuth } from '~/composables/useAuth'
-import type { Conversation } from '~/types/conversation'
+import { ref, watchEffect, onMounted, nextTick } from 'vue'
+
+const ChatList = defineAsyncComponent(() => import('~/components/chats/ChatList.vue'))
+const ChatWindow = defineAsyncComponent(() => import('~/components/chats/ChatWindow.vue'))
 
 const { conversations } = await useConversations()
+const { checkAuth, logout } = useAuth()
 const selectedConversation = ref<Conversation | undefined>(undefined)
-
-const selectConversation = (conv: Conversation) => {
-  selectedConversation.value = conv
-}
+const chatWindowRef = ref()
 
 const { 
   messages, 
@@ -38,6 +38,26 @@ const {
   sendMessage, 
   fetchMessages 
 } = useMessages(selectedConversation)
+
+const scrollToBottom = () => {
+  const container = chatWindowRef.value?.$el.querySelector('.chat-window__main')
+  if (container) {
+    container.scrollTop = container.scrollHeight
+  }
+}
+
+const selectConversation = (conv: Conversation) => {
+  selectedConversation.value = conv
+}
+
+const handleLogout = async () => {
+  try {
+    await logout()
+    navigateTo('/login', { replace: true })
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
 
 watchEffect(async () => {
   if (!selectedConversation.value && conversations.value.length > 0) {
@@ -49,20 +69,18 @@ watchEffect(async () => {
   }
 })
 
-const handleLogout = async () => {
-  try {
-    const { logout } = useAuth()
-    await logout()
-    navigateTo('/login', { replace: true })
-  } catch (error) {
-    console.error('Error:', error)
+watch(() => messages.value, () => {
+  nextTick(scrollToBottom)
+}, { deep: true })
+
+watch(() => isLoadingMessages.value, (newValue) => {
+  if (!newValue) {
+    nextTick(scrollToBottom)
   }
-}
+})
 
 onMounted(async () => {
-  const { checkAuth } = useAuth()
   const isAuthenticated = await checkAuth()
-  
   if (!isAuthenticated) {
     navigateTo('/login')
   }
