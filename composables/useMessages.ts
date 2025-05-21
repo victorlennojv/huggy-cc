@@ -23,12 +23,15 @@ export const useMessages = (selectedConversation: Ref<Conversation | undefined>)
 
   const sendMessage = async (msg: string) => {
     if (!selectedConversation.value) return
+    isLoadingMessages.value = true
     try {
       await MessageService.sendMessage(selectedConversation.value.id, msg)
       await fetchMessages()
     } catch (error) {
       console.error('Error handling message:', error)
       messages.value = []
+    } finally {
+      isLoadingMessages.value = false
     }
   }
 
