@@ -50,7 +50,7 @@ export const useMessages = (selectedConversation: Ref<Conversation | undefined>)
         messages.value[index] = {
           ...messages.value[index],
           status: 'error',
-          text: `${msg} ❗`
+          text: `${msg}`
         }
       }
     }

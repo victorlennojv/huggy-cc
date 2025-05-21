@@ -13,6 +13,7 @@ export const useConversations = async () => {
       lastMessage: (chat.lastMessage?.text || '').length > 20
         ? (chat.lastMessage?.text?.slice(0, 20) + ' ...')
         : (chat.lastMessage?.text || ''),
+      situation: chat.situation
     }))
   )
 

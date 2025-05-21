@@ -49,6 +49,7 @@
     </div>
     <div class="chat-window__footer">
       <InputField
+        :chat-situation="conversation.situation || ''"
         :conversation-id="conversation.id"
         @send="$emit('send', $event)"
       />
@@ -68,6 +69,7 @@ interface Conversation {
   avatar: string
   name: string
   lastMessage: string
+  situation?: string
 }
 
 defineProps<{
@@ -146,7 +148,7 @@ defineEmits(["send"])
     }
 
     &--error {
-      background: var(--fill-error-3);
+      background: var(--fill-danger-3);
       color: var(--text-on-color-high-strong);
     }
   }

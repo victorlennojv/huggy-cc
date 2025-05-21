@@ -4,7 +4,8 @@
       v-model="message"
       class="input-field__input"
       type="text"
-      placeholder="Escreva sua mensagem..."
+      :disabled="chatSituation === 'finishing'"
+      :placeholder="chatSituation === 'finishing' ? 'Chat finalizado' : 'Escreva sua mensagem...'"
       @keydown.enter.exact.prevent="handleSend"
     >
 
@@ -51,6 +52,7 @@ import BaseIconButton from "~/components/common/BaseIconButton.vue";
 const emit = defineEmits(["send", "upload"])
 const props = defineProps<{
   conversationId: string | number
+  chatSituation: string
 }>();
 
 const message = ref("")
