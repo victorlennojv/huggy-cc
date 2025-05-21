@@ -4,6 +4,7 @@
         :conversations="conversations"
         :selected="selectedConversation"
         @select="selectConversation"
+        @logout="handleLogout"
       />
       <ChatWindow
         v-if="selectedConversation"
@@ -16,29 +17,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 import ChatList from '~/components/chats/ChatList.vue'
 import ChatWindow from '~/components/chats/ChatWindow.vue'
-import type { Chat } from '~/types/chat'
+import { useConversations } from '~/composables/useConversations'
+import { useMessages } from '~/composables/useMessages'
+import { useAuth } from '~/composables/useAuth'
 import type { Conversation } from '~/types/conversation'
-import type { Message } from '~/types/messages'
 
-const { data: chats } = await useFetch<Chat[]>('/api/chats')
-
-const conversations = computed<Conversation[]>(() =>
-  (chats.value || []).map(chat => ({
-    id: chat.id,
-    name: chat.chatCustomer?.name || 'Sem nome',
-    avatar: chat.chatCustomer?.photo || '',
-    lastMessage: (chat.lastMessage?.text || '').length > 20
-      ? (chat.lastMessage?.text?.slice(0, 20) + ' ...')
-      : (chat.lastMessage?.text || ''),
-  }))
-)
-
+const { conversations } = await useConversations()
 const selectedConversation = ref<Conversation | undefined>(undefined)
-const messages = ref<Message[]>([])
-const isLoadingMessages = ref(false)
+
+const selectConversation = (conv: Conversation) => {
+  selectedConversation.value = conv
+}
+
+const { 
+  messages, 
+  isLoadingMessages, 
+  sendMessage, 
+  fetchMessages 
+} = useMessages(selectedConversation)
 
 watchEffect(async () => {
   if (!selectedConversation.value && conversations.value.length > 0) {
@@ -46,40 +45,17 @@ watchEffect(async () => {
   }
   
   if (selectedConversation.value) {
-    isLoadingMessages.value = true
-    try {
-      const data = await $fetch<Message[]>(`/api/chats/${selectedConversation.value.id}/messages`)
-      messages.value = (data as Message[]).sort((a, b) => new Date(a.sendAt).getTime() - new Date(b.sendAt).getTime())
-    } catch (error) {
-      console.error('Error fetching messages:', error)
-      messages.value = []
-    } finally {
-      isLoadingMessages.value = false
-    }
+    await fetchMessages()
   }
 })
 
-const selectConversation = (conv: Conversation) => { 
-  selectedConversation.value = conv 
-}
-
-async function sendMessage(msg: string) {
-  if (!selectedConversation.value) return
-  $fetch(`/api/chats/${selectedConversation.value.id}/messages`, {
-    method: 'POST',
-    body: { text: msg }
-  })
-  if (selectedConversation.value) {
-    isLoadingMessages.value = true
-    try {
-      const data = await $fetch<Message[]>(`/api/chats/${selectedConversation.value.id}/messages`)
-      messages.value = (data as Message[]).sort((a, b) => new Date(a.sendAt).getTime() - new Date(b.sendAt).getTime())
-    } catch (error) {
-      console.error('Error fetching messages:', error)
-      messages.value = []
-    } finally {
-      isLoadingMessages.value = false
-    }
+const handleLogout = async () => {
+  try {
+    const { logout } = useAuth()
+    await logout()
+    navigateTo('/login', { replace: true })
+  } catch (error) {
+    console.error('Error:', error)
   }
 }
 </script>

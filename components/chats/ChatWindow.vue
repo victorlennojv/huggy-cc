@@ -19,8 +19,7 @@
         :class="[
           'chat-window__message-group',
           {
-            'chat-window__message-group--me':
-              msg.senderType === 'user' || msg.senderType === 'agent',
+            'chat-window__message-group--me':msg.senderType === 'agent',
           },
         ]"
       >
@@ -28,8 +27,7 @@
           :class="[
             'chat-window__message',
             {
-              'chat-window__message--me':
-                msg.senderType === 'user' || msg.senderType === 'agent',
+              'chat-window__message--me': msg.senderType === 'agent',
             },
           ]"
         >
@@ -39,8 +37,7 @@
           :class="[
             'chat-window__time',
             {
-              'chat-window__time--me':
-                msg.senderType === 'user' || msg.senderType === 'agent',
+              'chat-window__time--me': msg.senderType === 'agent',
             },
           ]"
         >
