@@ -105,14 +105,11 @@ onMounted(async () => {
 
 @media (max-width: 600px) {
   .chat-container {
-    max-width: 100vw;
-    width: 100vw;
-    height: 100vh;
-    min-height: 100vh;
-    min-width: 100vw;
-    border-radius: 0;
+    border-radius: 6px;
+    height: 100%;
     box-shadow: none;
     position: fixed;
+    padding: 8px;
     top: 0; left: 0; right: 0; bottom: 0;
     animation: slideUp 0.4s cubic-bezier(.4,0,.2,1);
   }
