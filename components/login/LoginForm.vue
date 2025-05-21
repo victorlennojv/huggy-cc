@@ -1,8 +1,8 @@
 <template>
   <div class="login-form">
     <h2 class="login-form__title">Login</h2>
-    <BaseInput class="login-form__input" placeholder="E-mail ou usuário" />
-    <BaseButton class="login-form__button">Continuar</BaseButton>
+    <BaseInput model-value="loginmockado@teste.com" class="login-form__input" placeholder="E-mail ou usuário" />
+    <BaseButton class="login-form__button" @click="emit('on:login')">Continuar</BaseButton>
     <div class="login-form__divider-container">
       <hr class="login-form__divider" >
       <span class="login-form__divider-text">Ou</span>
@@ -29,9 +29,11 @@
 <script setup lang="ts">
 import BaseButton from '~/components/common/BaseButton.vue'
 import BaseInput from '~/components/common/BaseInput.vue'
+
+const emit = defineEmits(['on:login'])
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .login-form {
   display: flex;
   flex-direction: column;
@@ -67,6 +69,10 @@ import BaseInput from '~/components/common/BaseInput.vue'
     border-radius: 26px;
     margin-bottom: 8px;
     background-color: var(--fill-primary-3) !important;
+
+    &:hover {
+      background-color: var(--fill-primary-4) !important;
+    } 
   }
 
   &__divider {

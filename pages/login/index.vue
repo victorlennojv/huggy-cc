@@ -3,7 +3,7 @@
     <LoginHome v-if="!showForm" @open:login="openForm" />
     <transition name="slide-up">
       <BaseCard v-if="showForm" class="login-container__card">
-        <LoginForm />
+        <LoginForm @on:login="handleLogin" />
       </BaseCard>
     </transition>
   </div>
@@ -14,12 +14,20 @@ import { ref } from 'vue'
 import LoginHome from '~/components/login/LoginHome.vue'
 import LoginForm from '~/components/login/LoginForm.vue'
 import BaseCard from '~/components/common/BaseCard.vue'
+import { useAuth } from '~/composables/useAuth'
 
 const showForm = ref(false)
 const openForm = () => { showForm.value = true }
+
+const handleLogin = async () => {
+  const { login } = useAuth()
+  await login()
+  navigateTo('/chats')
+}
+
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .login-container {
   display: flex;
   align-items: center;
